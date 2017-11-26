@@ -31,3 +31,7 @@
   background-color: 'white';
   height: 100px;
 }
+
+#main .trigger {
+  cursor: pointer;
+}

@@ -9,7 +9,7 @@ class Main extends Component {
         return (
             <div style={styles.container} >
                 
-                <Navigation style={styles.navigationContainer}/>
+                <Navigation style={styles.navigationContainer} {...this.props}/>
                 
                 
             </div>

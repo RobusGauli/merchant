@@ -12,6 +12,7 @@ import {
   Button
 } from 'semantic-ui-react';
 import  {Main} from './Main';
+import { Route } from 'react-router-dom';
 import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 
 
@@ -32,6 +33,7 @@ class App extends Component {
     this.setState({
       logged: true 
     })
+    this.props.history.push('/dashboard');
   }
 
   onLogoutPress = () => {
@@ -41,6 +43,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { logged } = this.state;
     return (
       
@@ -49,20 +52,11 @@ class App extends Component {
 
             
             
-              <Transition visible={!logged} animation='fade' duration={100} unmountOnHide transitionOnMount>
-                <div style={styles.fullWidth}>
-                  <Login onSuccessSubmit={this.onSuccessSubmit}/>
-                </div>
-              </Transition>
-            
-            
+              
+        <Login onSuccessSubmit={this.onSuccessSubmit}/>
+                
               
            
-          <Transition visible={logged} animation='slide up' duration={300} unmountOnHide transitionOnMount>
-             <div style={styles.fullWidth}>
-              <Main onLogoutPress={this.onLogoutPress}/>
-            </div>
-          </Transition>
         </div>
        
        
