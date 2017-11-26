@@ -4,27 +4,65 @@ import logo from './logo.svg';
 import './App.css';
 import Navigation from './Login/Navigation';
 import Login from './Login';
-import { Grid, Image } from 'semantic-ui-react';
-
+import { 
+  Grid, 
+  Image,
+  Reveal,
+  Transition,
+  Button
+} from 'semantic-ui-react';
+import  {Main} from './Main';
+import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 
 
 class App extends Component {
 
-  onLogin = () => {
-    alert('on succesfull ligin');
+  state = {
+    logged: true
   }
+  
+  onClick = () => {
+    this.setState({
+      logged: !this.state.logged
+    })
+  }
+
+  onSuccessSubmit = ({username, password}) => {
+   
+    this.setState({
+      logged: true 
+    })
+  }
+
+  onLogoutPress = () => {
+    this.setState({
+      logged: false
+    })
+  }
+
   render() {
+    const { logged } = this.state;
     return (
       
         <div style={styles.container}> 
-          <div style={styles.left}>
             
-            <div style={styles.title}>NERU</div>
-            <div style={{...styles.title, fontSize: '17px', paddingTop: '14px'}}> Now Money on your own Hand </div>
-          </div>
-          <div style={styles.right}>
-            <Login onLogin={this.onLogin}/>
-          </div>
+
+            
+            
+              <Transition visible={!logged} animation='fade' duration={100} unmountOnHide transitionOnMount>
+                <div style={styles.fullWidth}>
+                  <Login onSuccessSubmit={this.onSuccessSubmit}/>
+                </div>
+              </Transition>
+            
+            
+              
+           
+          <Transition visible={logged} animation='slide up' duration={300} unmountOnHide transitionOnMount>
+             <div style={styles.fullWidth}>
+              <Main onLogoutPress={this.onLogoutPress}/>
+            </div>
+          </Transition>
         </div>
        
        
@@ -37,7 +75,18 @@ const styles = {
   container: {
     display: 'flex',
     flex: 1,
-    height: '100vh'
+    height: '100vh',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundImage: 'linear-gradient(-225deg, #B7F8DB 0%, #50A7C2 100%)',
+    position: 'relative'
+  },
+  fullWidth: {
+    position: 'absolute',
+    top:0,
+    left:0,
+    width: '100%',
+    height: '100%'
   },
   left: {
     backgroundColor: 'white',
