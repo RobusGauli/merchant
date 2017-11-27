@@ -18,6 +18,20 @@ export default class Navigation extends Component {
         sidebarVisible: false
     }
 
+    constructor() {
+        super();
+        document.body.addEventListener('mousedown', this.mo);
+
+    }
+
+    mo = (e) => {
+        if(window.innerWidth - e.clientX > 380) {
+            this.setState({
+                sidebarVisible: false
+            })
+        }
+    }
+
     onCollapse = (collapsed) => {
         console.log(collapsed);
         this.setState({ collapsed });
@@ -115,7 +129,8 @@ export default class Navigation extends Component {
                     <Icon type= {collapsed ? 'menu-unfold': 'menu-fold'} style={{
                         fontSize: '20px',
                         marginLeft: '13px',
-                        marginTop: '13px'
+                        marginTop: '13px',
+                        cursor: 'pointer'
 
                         }} 
                         

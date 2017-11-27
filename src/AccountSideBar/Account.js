@@ -1,6 +1,9 @@
 import React from 'react';
 import Balance from './Balance';
 import { Transition } from 'semantic-ui-react';
+import { Collapse } from 'antd';
+
+const Panel = Collapse.Panel;
 
 
 export default class Account extends React.Component {
@@ -12,6 +15,10 @@ export default class Account extends React.Component {
 
     toggleMenuItems = () => {
         this.setState({showMenuItems: !this.state.showMenuItems});
+    }
+
+    callback = key => {
+        console.log(key);
     }
 
     menuItemClick = item =>  event => {
@@ -26,17 +33,7 @@ export default class Account extends React.Component {
         }
     }
 
-    _renderMenuItems = () => {
-        return (
-            <div style={styles.menuItemContainer}>
-                <div style={styles.menuItem} onClick={this.menuItemClick('BALANCE')}> Balance </div>
-                <div style={styles.menuItem} onClick={this.menuItemClick('STATEMENT')}> Statement </div>
-                <div style={styles.menuItem} onClick={this.menuItemClick('DEFAULT')}> Default </div>
-                <div style={styles.menuItem} onClick={this.menuItemClick('RENAME')}> Rename </div>
-                <div style={styles.menuItem} onClick={this.menuItemClick('DELETE')}> Delete </div>
-            </div>
-        )
-    }
+    
 
     _renderBalance = () => {
         return (
@@ -57,14 +54,23 @@ export default class Account extends React.Component {
 
         return (
             <div>
-            <div style={styles.accountContainer} onClick={this.toggleMenuItems}>Hi there I am Account </div>
-            <Transition visible={showMenuItems} animation ='scale' duration={500} unmountOnHide mountOnShow>
-                <div>
-                    {showMenuItems && this._renderMenuItems()}
-                </div>
-            </Transition>
-            {showBalance && this._renderBalance()}
-            {showStatement && this._renderStatement()}
+            
+            
+            <div>
+                <Collapse onChange={this.callback} style={styles.customPanelStyle}>
+                    <Panel header='Balance' style={styles.customPanelStyle}>
+                        <p>HI there</p>
+                    </Panel>
+
+                    <Panel header='Statement' style={styles.customPanelStyle}>
+                        <Statement />
+                    </Panel>
+
+                </Collapse>
+            </div>
+            
+            
+            
             </div>
         )
     }
@@ -100,18 +106,9 @@ const styles = {
         display: 'flex',
         cursor: 'pointer',
         backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
+        
         height: '60px'
         
-    },
-    menuItemContainer: {
-        display: 'flex',
-        flex: 1,
-        backgroundColor: 'red',
-        height: '70px',
-        alignItems: 'center',
-        justifyContent: 'space-around'
     },
     menuItem: {
         cursor: 'pointer'
@@ -121,5 +118,12 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'space-around',
         height: '40px'
+    },
+    customPanelStyle: {
+        border: 0,
+        backgroundColor: 'rgba(114, 220, 210, 0.04)',
+        margin: 0,
+        
+        
     }
 }
