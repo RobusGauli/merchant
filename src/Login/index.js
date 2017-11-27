@@ -84,7 +84,7 @@ export default class Login extends Component {
                     open={open}
                 >
 
-                    <Segment style={{right : '3%', position: 'fixed', top: '2%', zIndex: 1000 }}>
+                    <Segment style={{right : '3%', position: 'fixed', top: '2%', zIndex: 1000, padding: '15px', borderRadius: '10px' }}>
                     <Header>Sorry</Header>
                     <p>{errorMessage}</p>
                     

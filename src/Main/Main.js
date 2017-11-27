@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from './Navigation';
-import Header from './Header';
+
 
 class Main extends Component {
 
@@ -19,10 +19,7 @@ class Main extends Component {
 
 
 const styles = {
-    headerContainer: {
-        marginBottom : '0px',
-        margin: '0px'
-    },
+    
     navigationContainer: {
         marginTop: '0px',
         margin: '0px',
@@ -32,6 +29,7 @@ const styles = {
     },
     container: {
         height: '100vh',
+        position: 'relative'
         
     }
 }
